@@ -21,7 +21,7 @@ std::vector<Card> make_std_deck()
     return deck;
 }
 
-void generate_hands(std::vector<Card> deck, Hand h, std::vector<Hand>& all_hands)
+void generate_hands(std::vector<Card> deck, Hand& h, std::vector<Hand>& all_hands)
 {
     if(h.is_full())
     {
@@ -65,7 +65,8 @@ int main(int argc, char* argv[])
 
     std::vector<Hand> all_hands;
     all_hands.reserve(3'000'000);
-    generate_hands(deck, Hand(), all_hands);
+    Hand startHand;
+    generate_hands(deck, startHand, all_hands);
 
     end = system_clock::now();
     duration<double> elapsed_seconds = end-start;
