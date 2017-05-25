@@ -2,6 +2,7 @@
 #define _CARD_H_
 
 #include <string>
+#include <vector>
 
 enum class Suit: int
 {
@@ -26,6 +27,28 @@ enum class Rank: int
     Jack,
     Queen,
     King
+};
+
+static auto suits = std::vector<Suit>{
+    Suit::Hearts,
+    Suit::Clubs,
+    Suit::Diamonds,
+    Suit::Spades
+};
+static auto ranks = std::vector<Rank>{
+    Rank::Ace,
+    Rank::Two,
+    Rank::Three,
+    Rank::Four,
+    Rank::Five,
+    Rank::Six,
+    Rank::Seven,
+    Rank::Eight,
+    Rank::Nine,
+    Rank::Ten,
+    Rank::Jack,
+    Rank::Queen,
+    Rank::King
 };
 
 
