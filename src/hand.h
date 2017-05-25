@@ -11,7 +11,7 @@ public:
     Hand();
     Hand(const Hand& hand);
 
-    std::vector<Card> get_cards() const;
+    std::vector<Card> get_cards()const;
     void add_card(Card c);
     bool is_full() const;
 

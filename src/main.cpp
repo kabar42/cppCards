@@ -1,29 +1,27 @@
 #include <stdio.h>
 #include <iostream>
 #include <chrono>
-#include <ctime>
-#include <queue>
 #include <vector>
 
 #include "card.h"
 #include "hand.h"
 
-std::queue<Card> make_std_deck()
+std::vector<Card> make_std_deck()
 {
-    std::queue<Card> deck;
+    std::vector<Card> deck;
 
     for(auto s : suits)
     {
         for(auto r : ranks)
         {
-            deck.push(Card(r, s));
+            deck.push_back(Card(r, s));
         }
     }
 
     return deck;
 }
 
-void generate_hands(std::queue<Card> deck, Hand h, std::vector<Hand>& all_hands)
+void generate_hands(std::vector<Card> deck, Hand h, std::vector<Hand>& all_hands)
 {
     if(h.is_full())
     {
@@ -32,8 +30,8 @@ void generate_hands(std::queue<Card> deck, Hand h, std::vector<Hand>& all_hands)
     else if(deck.size() > 0)
     {
         Hand newHand = Hand(h);
-        newHand.add_card(deck.front());
-        deck.pop();
+        newHand.add_card(deck[0]);
+        deck.erase(deck.begin());
 
         // call with new hand
         generate_hands(deck, newHand, all_hands);
@@ -50,7 +48,7 @@ int main(int argc, char* argv[])
     // auto c = Card(Rank::Ace, Suit::Spades);
     // printf("Card: %s\n", c.to_str().c_str());
 
-    std::queue<Card> deck = make_std_deck();
+    std::vector<Card> deck = make_std_deck();
 
     // std::string deck_str = "[";
     // while(!deck.empty())
@@ -72,6 +70,7 @@ int main(int argc, char* argv[])
     end = system_clock::now();
     duration<double> elapsed_seconds = end-start;
 
+    std::cout << "Possible Hands: " << all_hands.size() << "\n";
     std::cout << "Generation time: " << elapsed_seconds.count() << "s\n";
 
     return 0;
